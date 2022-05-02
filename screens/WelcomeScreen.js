@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import axios from 'axios';
-import { useEffect, useState, useLayoutEffect, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../store/auth-context';
 
 function WelcomeScreen() {
@@ -10,7 +10,7 @@ function WelcomeScreen() {
   const authCtx = useContext(AuthContext);
   const token = authCtx.token;
 
-  useLayoutEffect(() =>
+  useEffect(() =>
     {
       axios.get(
         'https://expense-tracker-app-22aa4-default-rtdb.europe-west1.firebasedatabase.app/message.json?auth='+ 
