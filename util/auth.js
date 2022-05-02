@@ -1,10 +1,7 @@
 import axios from 'axios';
+import apiKey from '../config/env';
 
-const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
-
-export const createUser = async (email, password) => {
-    await authenticate('signUp', email, password);
-}
+const API_KEY = apiKey.REACT_APP_API_KEY;
 
 export const authenticate = async (mode, email, password) => {
     const url=`https://identitytoolkit.googleapis.com/v1/accounts:${mode}?key=${API_KEY}`;
@@ -15,9 +12,14 @@ export const authenticate = async (mode, email, password) => {
         returnSecureToken: true
     });
 
-    console.log(response.data);
+    const token = response.data.idToken;
+    return token;
 }
 
-export const login = async (email, password) => {
-    await authenticate('signInWithPassword', email, password);
+export const login = (email, password) => {
+   return authenticate('signInWithPassword', email, password);
+}
+
+export const createUser = (email, password) => {
+    return authenticate('signUp', email, password);
 }
